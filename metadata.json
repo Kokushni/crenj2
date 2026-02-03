@@ -1,0 +1,5 @@
+{
+  "name": "Crypto Enjoyer",
+  "description": "A web-based infinite runner game featuring a rainbow-trailing cat in space. Built with React, TypeScript, and Canvas API.",
+  "requestFramePermissions": []
+}
