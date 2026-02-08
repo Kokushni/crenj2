@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { 
   CANVAS_WIDTH, 
@@ -88,7 +89,8 @@ import {
   RIDICULOUS_NEWS, 
   SHORT_REKT_NEWS,
   TRADING_WIN_CHANCE, 
-  TRADING_WIN_MULTIPLIER 
+  TRADING_WIN_MULTIPLIER,
+  TOKEN_CONTRACT_ADDRESS
 } from '../constants';
 import { GameState } from '../types';
 import type { 
@@ -188,6 +190,9 @@ export const NyanGame: React.FC = () => {
   const [hasShield, setHasShield] = useState(false); 
   const [ownedLuxuries, setOwnedLuxuries] = useState<string[]>([]);
   
+  // CA State
+  const [caCopied, setCaCopied] = useState(false);
+
   // Trading State
   const [selectedAsset, setSelectedAsset] = useState(TRADABLE_ASSETS[0]);
   const [tradeDirection, setTradeDirection] = useState<'LONG' | 'SHORT'>('LONG');
@@ -589,6 +594,13 @@ export const NyanGame: React.FC = () => {
       playTone(150, 'sawtooth', 0.2, 0.2);
       setTimeout(() => playTone(100, 'sawtooth', 0.3, 0.2), 100);
   }, [playTone]);
+  
+  const handleCopyCa = useCallback(() => {
+    navigator.clipboard.writeText(TOKEN_CONTRACT_ADDRESS);
+    setCaCopied(true);
+    playCollectSound();
+    setTimeout(() => setCaCopied(false), 2000);
+  }, [playCollectSound]);
 
   // --- MUSIC SCHEDULER ---
   const scheduleAudio = useCallback(() => {
@@ -3123,6 +3135,25 @@ export const NyanGame: React.FC = () => {
             Collect <span className="text-yellow-400">SOL</span> and <span className="text-fuchsia-400">MEME</span>. 
             <br/>Avoid the L2 Chains!
           </p>
+           
+          {/* CONTRACT ADDRESS DISPLAY */}
+          <div 
+            onClick={handleCopyCa}
+            className="mb-6 bg-slate-900/80 border-2 border-yellow-500/50 p-3 rounded-lg flex flex-col items-center gap-2 cursor-pointer hover:bg-slate-800 hover:border-yellow-400 transition-all group relative max-w-md w-full"
+          >
+              <div className="text-[10px] text-gray-400 font-bold tracking-[0.2em] uppercase">Official Contract Address</div>
+              <div className="flex items-center gap-3 w-full justify-center">
+                  <code className="text-yellow-400 font-mono text-xs md:text-sm break-all text-center group-hover:text-yellow-300">
+                      {TOKEN_CONTRACT_ADDRESS}
+                  </code>
+                  <span className="text-gray-500 group-hover:text-white transition-colors">📋</span>
+              </div>
+              {caCopied && (
+                  <div className="absolute inset-0 bg-green-900/90 flex items-center justify-center rounded-lg backdrop-blur-sm animate-in fade-in zoom-in duration-200">
+                      <span className="text-green-400 font-bold text-sm tracking-widest">COPIED TO CLIPBOARD!</span>
+                  </div>
+              )}
+          </div>
            
            <LeaderboardDisplay />
 
