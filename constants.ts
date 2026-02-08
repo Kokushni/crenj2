@@ -112,7 +112,7 @@ export const COST_BASE_LASER = 5000;
 export const COST_BASE_GAS = 5000; 
 
 // Contract Address - CHANGE THIS TO YOUR TOKEN ADDRESS
-export const TOKEN_CONTRACT_ADDRESS = "CA_COMING_SOON_TO_PUMP_FUN";
+export const TOKEN_CONTRACT_ADDRESS = "CA:C9gS78jezTcZfsgRVCetKuTTsmj2WQCahaevn1gDpump";
 
 // Trading Constants
 export const TRADING_LEVERAGE = 50;
