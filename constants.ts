@@ -111,6 +111,9 @@ export const COST_BASE_TRIPLE = 4000;
 export const COST_BASE_LASER = 5000; 
 export const COST_BASE_GAS = 5000; 
 
+// Contract Address - CHANGE THIS TO YOUR TOKEN ADDRESS
+export const TOKEN_CONTRACT_ADDRESS = "CA_COMING_SOON_TO_PUMP_FUN";
+
 // Trading Constants
 export const TRADING_LEVERAGE = 50;
 export const TRADING_WIN_CHANCE = 0.10;
